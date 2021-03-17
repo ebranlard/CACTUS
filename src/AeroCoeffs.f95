@@ -45,20 +45,22 @@ subroutine AeroCoeffs(nElem,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE
     CT=-CL5*sin(alpha5)+CD5*cos(alpha5)
 
     ! Calc tangential added mass increment by analogy to pitching flat plate potential flow theory (SAND report)
-    dCTAM=2.0/cos(alpha5)*wPNorm*CM25stat-CLstat5/2.0*wPNorm
-    ! Add in alphadot added mass effects (Theodorsen flat plate approx., Katz ch. 13)
-    dCLAD=pi*adotnorm
-    dCTAM=dCTAM-dCLAD*sin(alpha5)
-    dCNAM=dCLAD*cos(alpha5)
+    if (AddMassFlag==1) then
+       dCTAM=2.0/cos(alpha5)*wPNorm*CM25stat-CLstat5/2.0*wPNorm
+       ! Add in alphadot added mass effects (Theodorsen flat plate approx., Katz ch. 13)
+       dCLAD=pi*adotnorm
+       dCTAM=dCTAM-dCLAD*sin(alpha5)
+       dCNAM=dCLAD*cos(alpha5)
 
-    ! Add in added mass effects at low AOA (models not accurate at high AOA)
-    Fac=1.0
-    aref=abs(alpha5)
-    if ((aref > pi/4.0) .AND. (aref < 3.0*pi/4.0)) then
-        Fac = abs(1-4.0/pi*(aref-pi/4.0))
-    end if
-    CT=CT+Fac*dCTAM
-    CN=CN+Fac*dCNAM
+       ! Add in added mass effects at low AOA (models not accurate at high AOA)
+       Fac=1.0
+       aref=abs(alpha5)
+       if ((aref > pi/4.0) .AND. (aref < 3.0*pi/4.0)) then
+           Fac = abs(1-4.0/pi*(aref-pi/4.0))
+       end if
+       CT=CT+Fac*dCTAM
+       CN=CN+Fac*dCNAM
+    endif ! Added mass
 
     ! Calc total lift and drag coefficient based on flow direction at half-chord for reference
     CL=CN*cos(alpha5)-CT*sin(alpha5)
