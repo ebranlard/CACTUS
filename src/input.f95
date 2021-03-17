@@ -52,7 +52,7 @@ subroutine input(ErrFlag)
 
     ! Namelist input file declaration
     NAMELIST/ConfigInputs/RegTFlag,GPFlag,WPFlag,FSFlag,nr,convrg,nti,iut,iWall,ivtxcor,VCRFB,VCRFT,VCRFS,vCutOffRad,ifc,convrgf,nric,ntif,iutf,ixterm,xstop, &
-        Incompr,DSFlag,LBDynStallTp,PRFlag, &
+        Incompr,DSFlag,LBDynStallTp,PRFlag,AddMassFlag,InductionFlag,&
         k1pos,k1neg,GPGridSF,GPGridExtent,FSGridSF,TSFilFlag,ntsf
 
     NAMELIST/CaseInputs/jbtitle,GeomFilePath,RPM,Ut,nSect,AFDPath, &
@@ -103,6 +103,8 @@ subroutine input(ErrFlag)
     DSFlag     = 1
     LBDynStallTp = 1.7
     PRFlag     = 1
+    AddMassFlag= 1
+    InductionFlag= 1
     k1pos      = 1.0
     k1neg      = 0.5
     GPGridSF   = 1.0

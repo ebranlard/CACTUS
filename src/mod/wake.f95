@@ -1,6 +1,7 @@
 module wake
 
     ! Wake data
+    integer :: InductionFlag                ! Flag to toggle induced velocity computation
 
     ! Wake circulation data
     real, allocatable :: GT(:,:)            ! Trailing wake (streamwise) vorticity

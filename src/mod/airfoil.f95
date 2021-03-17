@@ -20,6 +20,9 @@ module airfoil
     integer :: ilxtp
     integer :: iuxtp
 
+    ! Added mass flag
+    integer :: AddMassFlag  ! Flag to toggle added mass computation
+
     ! Airfoil params for BV dyn stall
     real, allocatable :: alstlp(:,:)                ! Stall AOA (positive) at all Re numbers for each section
     real, allocatable :: alstln(:,:)                ! Stall AOA (negative) at all Re numbers for each section

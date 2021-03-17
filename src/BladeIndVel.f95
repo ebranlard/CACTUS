@@ -20,6 +20,10 @@ subroutine BladeIndVel(NT,ntTerm,NBE,NB,NE,XP,YP,ZP,UP,VP,WP,DUDX,Mode,CalcDer)
     WP=0.0
     DUDX=0.0
 
+    if (InductionFlag==0) then
+       return
+    endif
+
     if (Mode == 0) then
         ! Calc induced velocity from the whole blade system (bound, spanwise, and trailing wake vorticity)
 
