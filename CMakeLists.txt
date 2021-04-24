@@ -34,8 +34,8 @@ if(OPENMP MATCHES ON)
     string(APPEND dialect " ${OpenMP_Fortran_FLAGS}")
 endif()
 
-list(APPEND CMAKE_Fortran_FLAGS_DEBUG ${bounds})
-list(APPEND CMAKE_Fortran_FLAGS ${dialect})
+set(CMAKE_Fortran_FLAGS_DEBUG "${CMAKE_Fortran_FLAGS_DEBUG} ${bounds}")
+set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${dialect}")
 
 # add VERSION variable
 # see https://cmake.org/pipermail/cmake/2018-October/068389.html
