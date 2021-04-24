@@ -179,6 +179,7 @@ program CACTUS
     ! set pathnames for files with dynamically-named output files
     FieldOutputPath    = adjustl(trim(OutputPath))//path_separator//'field'
     WakeElemOutputPath = adjustl(trim(OutputPath))//path_separator//'element'
+    WakeVTKOutputPath  = adjustl('vtk_fvw')
     WallOutputPath        = adjustl(trim(OutputPath))//path_separator//'wall'
     ProbeOutputPath       = adjustl(trim(OutputPath))//path_separator//'probe'
 
@@ -194,6 +195,10 @@ program CACTUS
     ! Wake element data
     if (WakeElemOutFlag > 0) then
         call system('mkdir "'//adjustl(trim(WakeElemOutputPath))//path_separator//'"')
+    end if
+    ! VTK
+    if (WakeVTKOutFlag > 0) then
+        call system('mkdir "'//adjustl(trim(WakeVTKOutputPath))//path_separator//'"')
     end if
 
     ! Wall data
@@ -359,6 +364,11 @@ program CACTUS
         Call dystl_init_LB()
     end if
 
+    ! First wake output a t=0
+    if (WakeVTKOutFlag > 0) then
+       call WriteWakeVTK()
+    endif
+
     ! CPU time markers
     Call cpu_time(t0)
 !$  t0 = omp_get_wtime()
@@ -465,6 +475,9 @@ program CACTUS
                     end if
                 end if
             end if
+            if (WakeVTKOutFlag > 0) then
+               call WriteWakeVTK()
+            endif
 
             if (FieldOutFlag > 0) then
                 ! Write field data

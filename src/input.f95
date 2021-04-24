@@ -62,7 +62,7 @@ subroutine input(ErrFlag)
         WallMeshPath
 
     NAMELIST/ConfigOutputs/OutputPath,BladeElemOutFlag,DynStallOutFlag,WallOutFlag,DiagOutFlag, &
-        WakeElemOutFlag,WakeElemOutIntervalTimesteps,WakeElemOutStartTimestep,WakeElemOutEndTimestep, &
+        WakeElemOutFlag,WakeVTKOutFlag,WakeElemOutIntervalTimesteps,WakeElemOutStartTimestep,WakeElemOutEndTimestep, &
         FieldOutFlag,FieldOutIntervalTimesteps,FieldOutStartTimestep,FieldOutEndTimestep, &
         nxgrid,nygrid,nzgrid,xgridL,ygridL,zgridL,xgridU,ygridU,zgridU, &
         WallOutIntervalTimesteps,WallOutStartTimestep,WallOutEndTimestep, &
@@ -128,6 +128,7 @@ subroutine input(ErrFlag)
     DynStallOutFlag      = 0
     DiagOutFlag        = 0
     WakeElemOutFlag = 0
+    WakeVTKOutFlag = 0
     FieldOutFlag    = 0
     WallOutFlag        = 0
     ProbeFlag          = 0

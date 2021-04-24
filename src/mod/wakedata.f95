@@ -5,6 +5,7 @@ module wakedata
     ! Wake visualization data for WriteWakeData
 
     integer :: WakeElemOutFlag
+    integer :: WakeVTKOutFlag
     integer, allocatable :: WakeLineInd(:)
     integer :: NWakeInd
     character(1000) :: WakeOutHead = 'Normalized Time (-),Node ID,Origin Node,X/R (-),Y/R (-),Z/R (-),U/Uinf (-),V/Uinf (-),W/Uinf (-)'
