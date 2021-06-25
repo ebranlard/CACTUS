@@ -34,9 +34,9 @@ subroutine AeroCoeffs(nElem,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE
             Call LB_DynStall(nElem,CL5,CD5,alphaL,alpha5,umach,Re,SectInd,CLdyn5,CDdyn5)
         end if
 
-        CL5=CLdyn5
-        CD5=CDdyn5
-        CLCirc=CLdyn5
+        CL5    = CLdyn5
+        CD5    = CDdyn5
+        CLCirc = CLdyn5
 
     end if
 

@@ -90,18 +90,18 @@ subroutine bsload(nElem,IsBE,alpha,alpha5,alpha75,adotnorm,Re,umach,ur,CL,CD,CM2
         xe75=xe+0.5*ElemChordR*txe
         ye75=ye+0.5*ElemChordR*tye
         ze75=ze+0.5*ElemChordR*tze
-        CALL CalcBladeVel(wRotX,wRotY,wRotZ,xe5,ye5,ze5,uBlade5,vBlade5,wBlade5)
+        CALL CalcBladeVel(wRotX,wRotY,wRotZ,xe5 ,ye5 ,ze5, uBlade5, vBlade5, wBlade5)
         CALL CalcBladeVel(wRotX,wRotY,wRotZ,xe75,ye75,ze75,uBlade75,vBlade75,wBlade75)
-        urdn5 = (nxe*(uAve+uFSAve-uBlade5)+nye*(vAve+vFSAve-vBlade5)+nze*(wAve+wFSAve-wBlade5))
-        ur5=sqrt(urdn5**2+urdc**2)
-        alpha5=atan2(urdn5,urdc)
-        urdn75 = (nxe*(uAve+uFSAve-uBlade75)+nye*(vAve+vFSAve-vBlade75)+nze*(wAve+wFSAve-wBlade75))
-        ur75=sqrt(urdn75**2+urdc**2)
-        alpha75=atan2(urdn75,urdc)
+        urdn5   = (nxe*(uAve+uFSAve-uBlade5 )+nye*(vAve+vFSAve-vBlade5 )+nze*(wAve+wFSAve-wBlade5))
+        urdn75  = (nxe*(uAve+uFSAve-uBlade75)+nye*(vAve+vFSAve-vBlade75)+nze*(wAve+wFSAve-wBlade75))
+        ur5     = sqrt(urdn5**2  + urdc**2)
+        ur75    = sqrt(urdn75**2 + urdc**2)
+        alpha5  = atan2(urdn5,urdc)
+        alpha75 = atan2(urdn75,urdc)
     else
-        alpha5=alpha
-        alpha75=alpha
-        wPNorm=0.0
+        alpha5  = alpha
+        alpha75 = alpha
+        wPNorm  = 0.0
     end if
 
     dal=alpha75-AOA_Last(nelem1)
