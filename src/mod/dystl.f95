@@ -21,6 +21,16 @@ module dystl
 
     ! Additional BV diagnostic output
     real :: BV_alpha, BV_adotnorm, BV_alrefL, BV_alrefD
+    real :: BV_Tu
+    real :: BV_delN
+    real :: BV_delP
+    real :: BV_TransA
+    real :: BV_alphaLagD
+    real :: BV_gammaL
+    real :: BV_gammaD
+    real :: BV_dalphaL
+    real :: BV_dalphaD
+    real :: BV_alphadot
 
 
     ! Leishman-Beddoes model

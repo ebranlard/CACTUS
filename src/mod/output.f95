@@ -30,8 +30,10 @@ module output
 
     ! Dynamic stall diagnostic output
     integer :: DynStallOutType
-    character(10000) :: DynStallOutBVHead = 'Normalized Time (-),Theta (rad),Blade,Element,Rev,alpha (deg),adotnorm (-),alrefL (deg),alrefD (deg),DynamicFlagL,DynamicFlagD'
-    integer :: DynStallOutBVNCols = 11                           ! Number of BV diagnostic outputs
+    !character(10000) :: DynStallOutBVHead = 'Normalized Time (-),Theta (rad),Blade,Element,Rev,alpha (deg),adotnorm (-),alrefL (deg),alrefD (deg),DynamicFlagL,DynamicFlagD'
+    !integer :: DynStallOutBVNCols = 11                           ! Number of BV diagnostic outputs
+    character(10000) :: DynStallOutBVHead = 'Normalized Time (-),Theta (rad),Blade,Element,Rev,alpha (deg),adotnorm (-),alrefL (deg),alrefD (deg),DynamicFlagL,DynamicFlagD,alphaLagD (deg),delN,delP,transA,gammaL,gammaD,dalphaL (deg),dalphaD (deg),Tu,alphadot'
+    integer :: DynStallOutBVNCols = 21
     integer :: DynStallOutBVRow                                 ! Rows of element row output
     real, allocatable :: DynStallOutBVData(:,:)                 ! Diagnostic data for each timestep
     character(10000) :: DynStallOutLBHead = 'Normalized Time (-),Theta (rad),Blade,Element,Rev,L1,L2,L3,L4,L5,L6,L7,L8,L9,Check'

@@ -106,6 +106,11 @@ subroutine bsload(nElem,IsBE,alpha,alpha5,alpha75,adotnorm,Re,umach,ur,CL,CD,CM2
 
     dal=alpha75-AOA_Last(nelem1)
     adotnorm=dal/DT*ElemChordR/(2.0*max(ur,0.001))  ! adot*c/(2*U)
+    BV_Tu = ElemChordR/(2.0*max(ur,0.001))
+    BV_alphadot = (alpha75-AOA_Last(nelem1))*condeg
+
+
+
     !--------
 
     ! Evaluate aero coefficients and dynamic stall effects as appropriate

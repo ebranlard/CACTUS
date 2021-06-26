@@ -110,6 +110,7 @@ subroutine BV_DynStall(nElem,CLstat,CDstat,alpha,adotnorm,umach,Re,SectInd,CL,CD
         BV_DynamicFlagD(nElem)=1
     else
         BV_DynamicFlagD(nElem)=0
+        alrefD=alpha
     end if
 
     ! Static or dynamic model
@@ -138,6 +139,15 @@ subroutine BV_DynStall(nElem,CLstat,CDstat,alpha,adotnorm,umach,Re,SectInd,CL,CD
     BV_adotnorm=adotnorm
     BV_alrefL=alrefL*condeg
     BV_alrefD=alrefD*condeg
+
+    BV_delN      = delN
+    BV_delP      = delP
+    BV_TransA    = TransA
+    BV_alphaLagD = alLagD*condeg
+    BV_gammaL = gammal
+    BV_gammaD = gammam
+    BV_dalphaL = dalphaL*isgn*condeg
+    BV_dalphaD = dalphaD*isgn*condeg
 
     return
 end subroutine BV_DynStall
