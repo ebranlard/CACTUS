@@ -112,8 +112,12 @@ subroutine bsload(nElem,IsBE,alpha,alpha5,alpha75,adotnorm,Re,umach,ur,CL,CD,CM2
     Call AeroCoeffs(nElem,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE,CL,CD,CN,CT,CLCirc,CM25)
 
     ! Bound vortex strength from CL via Kutta-Joukowski analogy.
+    if (abs(PrescribedGamma)>1e-5) then
+       GB_Raw(nElem1)=PrescribedGamma
+    else
+       GB_Raw(nElem1)=CircDir*(CLCirc*ElemChordR*ur/2.0)
+    endif
     ! Save corresponding AOA as well
-    GB_Raw(nElem1)=CircDir*(CLCirc*ElemChordR*ur/2.0)
     !         AOA(nElem1)=alpha
     AOA(nElem1)=alpha75
     ! normalized time step used to update states in the LB model

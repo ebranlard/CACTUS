@@ -745,6 +745,7 @@ subroutine WriteWakeVTK()
     use configr
     use fnames
     use pathseparator
+    use varscale, only: R_in_m, U_in_mps
     implicit none
 
     integer :: tCount, tCountMax, wcount, node_id
@@ -766,7 +767,7 @@ subroutine WriteWakeVTK()
     LatticeGamma=0.0
 
     ! Set new wake element positions
-    print*,'>>> nb, nbe',nb,nbe
+    !print*,'>>> nb, nbe',nb,nbe
     !print*,'>>>x', x(1,:)
     !print*,'>>>y',-z(1,:)
     !print*,'>>>z', y(1,:)
@@ -801,12 +802,12 @@ subroutine WriteWakeVTK()
               j=0
               nej=nei+j ! element index
               iSpan = j+1
-              LatticeGamma(iSpan,iDepth) = GT(it, nej)
+              LatticeGamma(iSpan,iDepth) = GT(it-1, nej)
               do j=1,nbe-1
                  nej=nei+j ! element index
                  !iSpan = nbe+1-j
                  iSpan = j+1
-                 LatticeGamma(iSpan,iDepth)  = LatticeGamma(iSpan-1, iDepth) + GT(it,nej)
+                 LatticeGamma(iSpan,iDepth)  = LatticeGamma(iSpan-1, iDepth) + GT(it-1,nej)
               enddo
               !j=nbe
               !nej=nei+j ! element index
@@ -818,10 +819,11 @@ subroutine WriteWakeVTK()
            ! write(12,'(E13.7,",",$)') V(tCount,wcount)     ! Wake element Y velocity
            ! write(12,'(E13.7)') W(tCount,wcount)           ! Wake element Z velocity
         enddo ! Loop on depth
+        LatticeGamma = - LatticeGamma*(U_in_mps *R_in_m) ! NOTE: same convention as OLAF and converted to SI units
 
-       write(nt_str,'(I9.9)') nt
+       write(nt_str,'(I9.9)') nt-1 ! -1 To match OLAF
        WakeOutputFN=adjustl(trim(WakeVTKOutputPath)//path_separator//trim(FNBase)//'_Bld'//I2ABC(i)//'.'//trim(nt_str)//'.vtk')
-       print*,'>>>',trim(WakeOutputFN)
+       !print*,'>>>',trim(WakeOutputFN)
        ! NOTE GT GS trailed,shed TODO TODO
       call WrVTK_Lattice(WakeOutputFN, mvtk, LatticePoints, LatticeGamma, bladeFrame=.False.) !, LatticeData3d, bladeFrame)
     end do
