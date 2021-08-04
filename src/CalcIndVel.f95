@@ -11,7 +11,7 @@ subroutine CalcIndVel(NT,ntTerm,NBE,NB,NE,Px,Py,Pz,Vx,Vy,Vz)
 
     real :: Point(3), dVel(3), Vel(3)
 
-    ! Calc wake induced velocity at wake locations
+    ! Calc wake induced velocity at input locations
     if (InductionFlag==1) then
        CALL BladeIndVel(NT,ntTerm,NBE,NB,NE,Px,Py,Pz,Vx,Vy,Vz,dUdX,0,0)
 

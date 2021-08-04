@@ -1,7 +1,7 @@
 module wake
 
     ! Wake data
-    integer :: InductionFlag                ! Flag to toggle induced velocity computation
+    integer :: InductionFlag                ! Flag to toggle induced velocity computation (0: no induced velocity, 1: full induced velocity)
 
     ! Wake circulation data
     real, allocatable :: GT(:,:)            ! Trailing wake (streamwise) vorticity
@@ -35,8 +35,8 @@ contains
 
         integer :: MaxWakeNodes, MaxSegEnds
 
-        allocate(GT(MaxWakeNodes,MaxSegEnds))
-        allocate(GS(MaxWakeNodes+1,MaxSegEnds))         ! needs extra spanwise station for shedvor
+        allocate(GT(MaxWakeNodes,MaxSegEnds)); GT=0.0
+        allocate(GS(MaxWakeNodes+1,MaxSegEnds));GS=0.0         ! needs extra spanwise station for shedvor
         allocate(X(MaxWakeNodes,MaxSegEnds))
         allocate(Y(MaxWakeNodes,MaxSegEnds))
         allocate(Z(MaxWakeNodes,MaxSegEnds))

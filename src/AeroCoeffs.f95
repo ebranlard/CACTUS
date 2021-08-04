@@ -1,4 +1,4 @@
-subroutine AeroCoeffs(nElem,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE,CL,CD,CN,CT,CLCirc,CM25)
+subroutine AeroCoeffs(nElem,alpha25,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE,CL,CD,CN,CT,CLCirc,CM25)
 
     use airfoil
     use dystl
@@ -7,7 +7,7 @@ subroutine AeroCoeffs(nElem,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE
     implicit none
 
     integer :: SectInd, IsBE, nElem
-    real :: alpha75, alpha5, adotnorm, wPNorm, Re, umach, CL, CD, CN, CT, CLCirc
+    real :: alpha25, alpha75, alpha5, adotnorm, wPNorm, Re, umach, CL, CD, CN, CT, CLCirc
     real :: CLstat75, CLstat5, CDstat75, CLdyn5, CDdyn5, dCLAD, dCTAM, dCNAM, CL5, CD5, C, C1, CM25stat, CM25
     real :: alphaL, alphaD, aref, Fac
 
@@ -41,8 +41,17 @@ subroutine AeroCoeffs(nElem,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE
     end if
 
     ! Tangential and normal coeffs
-    CN=CL5*cos(alpha5)+CD5*sin(alpha5)
-    CT=-CL5*sin(alpha5)+CD5*cos(alpha5)
+    if (CntProjFlag==1) then
+       CN= CL5*cos(alpha5)+CD5*sin(alpha5)
+       CT=-CL5*sin(alpha5)+CD5*cos(alpha5)
+    else
+       CN= CL5*cos(alpha25)+CD5*sin(alpha25)
+       CT=-CL5*sin(alpha25)+CD5*cos(alpha25)
+       if (AddMassFlag==1) then
+          print*,'[ERROR] CntProjFlag=0 has not been tested with AddMassFlag=1'
+          STOP
+       endif
+    endif
 
     ! Calc tangential added mass increment by analogy to pitching flat plate potential flow theory (SAND report)
     if (AddMassFlag==1) then
@@ -63,8 +72,13 @@ subroutine AeroCoeffs(nElem,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE
     endif ! Added mass
 
     ! Calc total lift and drag coefficient based on flow direction at half-chord for reference
-    CL=CN*cos(alpha5)-CT*sin(alpha5)
-    CD=CN*sin(alpha5)+CT*cos(alpha5)
+    if (CntProjFlag==1) then
+       CL=CN*cos(alpha5)-CT*sin(alpha5)
+       CD=CN*sin(alpha5)+CT*cos(alpha5)
+    else
+       CL=CN*cos(alpha25)-CT*sin(alpha25)
+       CD=CN*sin(alpha25)+CT*cos(alpha25)
+    endif
 
     return
 end subroutine AeroCoeffs

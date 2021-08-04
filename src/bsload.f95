@@ -114,7 +114,7 @@ subroutine bsload(nElem,IsBE,alpha,alpha5,alpha75,adotnorm,Re,umach,ur,CL,CD,CM2
     !--------
 
     ! Evaluate aero coefficients and dynamic stall effects as appropriate
-    Call AeroCoeffs(nElem,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE,CL,CD,CN,CT,CLCirc,CM25)
+    Call AeroCoeffs(nElem,alpha,alpha75,alpha5,Re,wPNorm,adotnorm,umach,SectInd,IsBE,CL,CD,CN,CT,CLCirc,CM25)
 
     ! Bound vortex strength from CL via Kutta-Joukowski analogy.
     if (abs(PrescribedGamma)>1e-5) then

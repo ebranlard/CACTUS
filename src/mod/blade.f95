@@ -27,6 +27,7 @@ module blade
     integer :: TSFilFlag            ! 1 to enable timestep filtering, 0 for no filtering (default)
     integer :: ntsf                 ! Number of timesteps over which the bound vorticity is filtered smooth (if TSFilFlag = 1)
     real    :: KTF
+    real    :: PrescribedGamma
 
 contains
 

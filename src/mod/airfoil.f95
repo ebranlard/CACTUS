@@ -22,6 +22,7 @@ module airfoil
 
     ! Added mass flag
     integer :: AddMassFlag  ! Flag to toggle added mass computation
+    integer :: CntProjFlag  ! Flag to toggle projection of Cn/Ct using alpha50 (if true0 or alpha25 (if false)
 
     ! Airfoil params for BV dyn stall
     real, allocatable :: alstlp(:,:)                ! Stall AOA (positive) at all Re numbers for each section
