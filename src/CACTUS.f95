@@ -365,9 +365,9 @@ program CACTUS
     end if
 
     ! First wake output a t=0
-    if (WakeVTKOutFlag > 0) then
-       call WriteWakeVTK()
-    endif
+    !if (WakeVTKOutFlag > 0) then
+    !   call WriteWakeVTK()
+    !endif
 
     ! CPU time markers
     Call cpu_time(t0)
@@ -399,6 +399,15 @@ program CACTUS
             ! Set new wake element locations
             ! JCM: can move this function into expanded blade module when created...
             CALL SetBoundWake()
+            !print'(A,3(F7.3))','Bnd1', xBE(2),-zBE(2), yBE(2)
+            !print'(A,3(F7.3))','Bnd2', xBE(1),-zBE(1), yBE(1)
+
+            !print'(A,3(F7.3))','x1 ', x(nt:1:-1,2)
+            !print'(A,3(F7.3))','y1 ',-z(nt:1:-1,2)
+            !print'(A,3(F7.3))','z1 ', y(nt:1:-1,2)
+            !print'(A,3(F7.3))','x2 ', x(nt:1:-1,1)
+            !print'(A,3(F7.3))','y2 ',-z(nt:1:-1,1)
+            !print'(A,3(F7.3))','z2 ', y(nt:1:-1,1)
 
             ! Fixed-point iteration to converge non-linear system consisting of
             ! blade element bound vorticity (potentially non linear with local AOA),
@@ -515,6 +524,14 @@ program CACTUS
 
             ! Convect the wake (including wake to be shed from the current blade location)
             CALL conlp()
+
+            !print*,'>>>>> AFTER CONVECTION'
+            !print'(A,3(F9.3))','xc1 ', x(3:1:-1,2)
+            !print'(A,3(F9.3))','yc1 ',-z(3:1:-1,2)
+            !print'(A,3(F9.3))','zc1 ', y(3:1:-1,2)
+            !print'(A,3(F9.3))','xc2 ', x(3:1:-1,1)
+            !print'(A,3(F9.3))','yc2 ',-z(3:1:-1,1)
+            !print'(A,3(F9.3))','zc2 ', y(3:1:-1,1)
 
             ! Update bound vorticity timestep filter (used to reject grid scale temporal modes)
             if (TSFilFlag == 1) then

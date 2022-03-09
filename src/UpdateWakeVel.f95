@@ -35,16 +35,22 @@ subroutine UpdateWakeVel()
 
         ! If this is proper time step, calculate system influence on wake velocities
         if (NT .eq. NSW) then
+           if (InductionFlag==1) then 
 !$omp parallel do private(j)
-            do I=1,NE
-                do J=ntTerm,NT1
-                    Call CalcIndVel(NT,ntTerm,NBE,NB,NE,X(J,I),Y(J,I),Z(J,I),U(J,I),V(J,I),W(J,I))
-                end do
-            end do
+               do I=1,NE
+                  do J=ntTerm,NT1
+                     Call CalcIndVel(NT,ntTerm,NBE,NB,NE,X(J,I),Y(J,I),Z(J,I),U(J,I),V(J,I),W(J,I))
+                  end do
+               end do
 !$omp end parallel do
+           else
+              U(J,I)=0.0
+              V(J,I)=0.0
+              W(J,I)=0.0
+           endif
 
-            ! Set the next update timestep
-            nsw=nt+iut
+           ! Set the next update timestep
+           nsw=nt+iut
         end if
 
     end if

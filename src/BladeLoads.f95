@@ -128,6 +128,16 @@ subroutine BladeLoads(NLTol,iConv)
                 DynStallOutBVData(DynStallOutBVRow,9)=BV_alrefD                   ! ref drag AOA
                 DynStallOutBVData(DynStallOutBVRow,10)=BV_DynamicFlagL(nej)       ! Lift flag
                 DynStallOutBVData(DynStallOutBVRow,11)=BV_DynamicFlagD(nej)       ! Drag flag
+                DynStallOutBVData(DynStallOutBVRow,12)=BV_alphaLagD
+                DynStallOutBVData(DynStallOutBVRow,13)=BV_delN
+                DynStallOutBVData(DynStallOutBVRow,14)=BV_delP
+                DynStallOutBVData(DynStallOutBVRow,15)=BV_TransA
+                DynStallOutBVData(DynStallOutBVRow,16)=BV_gammaL
+                DynStallOutBVData(DynStallOutBVRow,17)=BV_gammaD
+                DynStallOutBVData(DynStallOutBVRow,18)=BV_dalphaL
+                DynStallOutBVData(DynStallOutBVRow,19)=BV_dalphaD
+                DynStallOutBVData(DynStallOutBVRow,20)=BV_Tu
+                DynStallOutBVData(DynStallOutBVRow,21)=BV_alphadot
             else if (DynStallOutFlag == 1 .AND. DynStallOutType == 2) then
                 DynStallOutLBRow=(i-1)*nbe+j
                 DynStallOutLBData(DynStallOutLBRow,1)=TimeN         ! Normalized simulation time (t*Uinf/Rmax)

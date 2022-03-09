@@ -48,6 +48,9 @@ subroutine VorIVel(VFlag,CalcDer,G,X1,Y1,Z1,X2,Y2,Z2,XP,YP,ZP,UP,VP,WP,DUDX)
     else
         VRAD2=VRAD2_B
     end if
+    !print'(A,6(F7.3))','VortIVel P ',X1,-Z1,Y1,X2,-Z2,Y2
+    !print'(A,3(F7.3))','VortIVel CP',XP,-ZP,YP
+    !print'(A,2(F7.3))','VortIVel GE',G, VRAD2
 
     if (CCAV >= vCutOffRad) then
         if (ivtxcor > 0 .and. CCAV < A2*VRAD2) then
@@ -77,6 +80,7 @@ subroutine VorIVel(VFlag,CalcDer,G,X1,Y1,Z1,X2,Y2,Z2,XP,YP,ZP,UP,VP,WP,DUDX)
         VF   = 0.0
         DVFDX = 0.0
     end if
+    !print'(A,6(F7.3))','VortIVel U ',CCAX*VF, -CCAZ*VF, CCAY*VF
 
     UP = UP+CCAX*VF
     VP = VP+CCAY*VF

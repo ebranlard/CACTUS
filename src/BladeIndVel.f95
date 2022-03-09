@@ -29,6 +29,7 @@ subroutine BladeIndVel(NT,ntTerm,NBE,NB,NE,XP,YP,ZP,UP,VP,WP,DUDX,Mode,CalcDer)
 
         ! CALCULATE THE VELOCITY CONTRIBUTIONS DUE TO TRAILING VORTICIES  ( GT(1:NT-1,:) )
         ! ntTerm represents the furthest away wake elements that are to be considered. (Calculated using user input xstop)
+        !print*,'Trail'
         VFlag=1
         do i=1,ne
             do j=ntTerm,NT1
@@ -37,6 +38,7 @@ subroutine BladeIndVel(NT,ntTerm,NBE,NB,NE,XP,YP,ZP,UP,VP,WP,DUDX,Mode,CalcDer)
         end do
 
         ! CALCULATE THE VELOCITY CONTRIBUTIONS DUE TO SPANWISE VORTICIES, including current bound vorticity ( GS(1:NT,:) )
+        !print*,'Span (with Bound)'
         do i=1,nb
             nei=(i-1)*(nbe+1)
             do j=1,nbe
@@ -55,6 +57,7 @@ subroutine BladeIndVel(NT,ntTerm,NBE,NB,NE,XP,YP,ZP,UP,VP,WP,DUDX,Mode,CalcDer)
     else if (Mode == 1) then
         ! Calc induced velocity from bound vorticity only
 
+        !print*,'Bound'
         VFlag=0
         do i=1,nb
             nei=(i-1)*(nbe+1)
@@ -70,6 +73,7 @@ subroutine BladeIndVel(NT,ntTerm,NBE,NB,NE,XP,YP,ZP,UP,VP,WP,DUDX,Mode,CalcDer)
 
         ! CALCULATE THE VELOCITY CONTRIBUTIONS DUE TO TRAILING VORTICIES  ( GT(1:NT-1,:) )
         ! ntTerm represents the furthest away wake elements that are to be considered. (Calculated using user input xstop)
+        !print*,'Trail'
         VFlag=1
         do i=1,ne
             do j=ntTerm,NT1
@@ -78,6 +82,7 @@ subroutine BladeIndVel(NT,ntTerm,NBE,NB,NE,XP,YP,ZP,UP,VP,WP,DUDX,Mode,CalcDer)
         end do
 
         ! CALCULATE THE VELOCITY CONTRIBUTIONS DUE TO SPANWISE VORTICIES, NOT including current bound vorticity ( GS(1:NT-1,:) )
+        !print*,'Span(noBound)'
         VFlag=2
         do i=1,nb
             nei=(i-1)*(nbe+1)

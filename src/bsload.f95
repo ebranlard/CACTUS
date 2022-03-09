@@ -37,6 +37,7 @@ subroutine bsload(nElem,IsBE,alpha,alpha5,alpha75,adotnorm,Re,umach,ur,CL,CD,CM2
     xe=xBC(nElem)
     ye=yBC(nElem)
     ze=zBC(nElem)
+    !print'(A,3(F12.5))','1/4c  ', xe, -ze, ye
 
     ! Element normal, tangential, and spanwise vectors
     nxe=nxBC(nElem)
@@ -62,12 +63,22 @@ subroutine bsload(nElem,IsBE,alpha,alpha5,alpha75,adotnorm,Re,umach,ur,CL,CD,CM2
     uAve=(uB(nElem)+uB(nElem1))/2.0
     vAve=(vB(nElem)+vB(nElem1))/2.0
     wAve=(wB(nElem)+wB(nElem1))/2.0
+    !print*,'uw 1  ',uB(nElem), vB(nElem), wB(nElem)
+    !print*,'uw 2  ',uB(nElem1), vB(nElem1), wB(nElem1)
+    !print'(A,3(F12.5))','uw avg',uAve,-wAve,vAve
+
     ! Freestream velocity
     uFSAve=(uFSB(nElem)+uFSB(nElem1))/2.0
     vFSAve=(vFSB(nElem)+vFSB(nElem1))/2.0
     wFSAve=(wFSB(nElem)+wFSB(nElem1))/2.0
+!    print*,'u0 1  ',uFSB(nElem), vFSB(nElem), wFSB(nElem)
+!    print*,'u0 2  ',uFSB(nElem1), vFSB(nElem1), wFSB(nElem1)
+    !print'(A,3(F12.5))','u0 avg',uFSAve, -wFSAve, vFSAve
+
     ! Blade velocity due to rotation
     CALL CalcBladeVel(wRotX,wRotY,wRotZ,xe,ye,ze,uBlade,vBlade,wBlade)
+
+    !print'(A,3(F12.5))','uB avg',uBlade, -wBlade, vBlade
 
     ! Calc element normal and tangential velocity components. Calc element pitch rate.
     urdn = (nxe*(uAve+uFSAve-uBlade)+nye*(vAve+vFSAve-vBlade)+nze*(wAve+wFSAve-wBlade))     ! Normal
